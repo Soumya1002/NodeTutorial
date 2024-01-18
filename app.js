@@ -18,26 +18,21 @@ const server = http.createServer((req, res) => {
         const body=[];
 
         req.on('data', (chunk) => {
-           // console.log(chunk);
+           console.log(chunk);
             body.push(chunk);
         });
 
-
-
         req.on('end', () => {
             const parsedBody=Buffer.concat(body).toString();
-            console.log(parsedBody);
-        })
-           
+            const message=parsedBody.split("=");
+            fs.writeFileSync('result.txt', message[1]);
+        })         
             fs.writeFileSync('hello.txt', "DUMMY");
-
-                res.setHeader('Location', '/');
-                res.statusCode = 302;
-                return res.end();
+            res.setHeader('Location', '/');
+            res.statusCode = 302;
+            return res.end();
             
-        }
-
-     
+        }    
     
 
     res.setHeader('Content-type', 'text/html');

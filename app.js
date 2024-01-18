@@ -1,4 +1,5 @@
 const http=require('http');
+const fs=require('fs');
 
 
 const server=http.createServer((req,res)=>{
@@ -16,9 +17,11 @@ const server=http.createServer((req,res)=>{
         return res.end();
     }
 
-    if(ur==='/message' && method=='POST'){
+    if(url==='/message' && method=='POST'){
+        fs.writeFileSync('message.txt', 'DUMMY');
         res.setHeader('Location','/');
         res.statusCode=302;
+        return res.end();
     }
 
     res.setHeader('Content-type','text/html');   
@@ -29,4 +32,4 @@ const server=http.createServer((req,res)=>{
     res.end();
    
 });
-server.listen(3000);
+server.listen(5000);

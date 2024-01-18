@@ -3,10 +3,11 @@ const http=require('http');
 
 const server=http.createServer((req,res)=>{
     const url=req.url;
+    const method=req.method;
   
 
     if(url==='/'){
-       // res.setHeader('Content-type','text/html');
+       res.setHeader('Content-type','text/html');
         res.write('<html>'); 
         res.write('<head><title>Enter Details</title></head>');
         res.write('<body><h1>Hello from LOGIN PAGE</h1>');  
@@ -14,8 +15,13 @@ const server=http.createServer((req,res)=>{
         res.write('</html>');
         return res.end();
     }
-    //res.setHeader('Content-type','text/html');
-   
+
+    if(ur==='/message' && method=='POST'){
+        res.setHeader('Location','/');
+        res.statusCode=302;
+    }
+
+    res.setHeader('Content-type','text/html');   
     res.write('<html>'); 
     res.write('<head><title>Nodejs tutorial</title></head>');
     res.write('<body><h1>Hello from App.js</h1></body>');  

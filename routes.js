@@ -43,4 +43,7 @@ const method = req.method;
     return res.end();
 }
 
-module.exports=requestHandler;
+module.exports={
+    handler:requestHandler, 
+    someText:'Printing some text'
+};
